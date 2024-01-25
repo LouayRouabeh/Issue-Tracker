@@ -5,9 +5,38 @@ import React from "react";
 import { GiSpottedBug } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import classnames from "classnames";
+import { useSession } from "next-auth/react";
+import {
+  Avatar,
+  Box,
+  Container,
+  DropdownMenu,
+  DropdownMenuItem,
+  Flex,
+  Text,
+} from "@radix-ui/themes";
 
 const NavBar = () => {
+  return (
+    <nav className=" border-b mb-5 px-5 py-3 ">
+      <Container>
+        <Flex justify="between">
+          <Flex align="center" gap="3">
+            <Link href="/">
+              <GiSpottedBug />
+            </Link>
+            <NavLinks />
+          </Flex>
+          <AuthStatus />
+        </Flex>
+      </Container>
+    </nav>
+  );
+};
+
+const NavLinks = () => {
   const currentpath = usePathname();
+
   console.log(currentpath);
 
   const links = [
@@ -15,26 +44,56 @@ const NavBar = () => {
     { label: "Issues", href: "/issues/list" },
   ];
   return (
-    <nav className="flex space-x-6 border-b mb-5 px-5 h-14 items-center">
-      <Link href="/">
-        <GiSpottedBug />
-      </Link>
-      <ul className="flex space-x-6">
-        {links.map((link) => (
+    <ul className="flex space-x-6">
+      {links.map((link) => (
+        <li key={link.href}>
           <Link
-            key={link.href}
             className={classnames({
-              "text-zinc-900": link.href === currentpath,
-              "text-zinc-500": link.href !== currentpath,
-              "hover:text-zinc-800 transition-colors": true,
+              "nav-link": true,
+              "!text-zinc-900": link.href === currentpath,
             })}
             href={link.href}
           >
             {link.label}
           </Link>
-        ))}
-      </ul>
-    </nav>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const AuthStatus = () => {
+  const { status, data: session } = useSession();
+  if (status === "loading") return null;
+  if (status === "unauthenticated")
+    return (
+      <Link className="nav-link" href="/api/auth/signin">
+        Log In
+      </Link>
+    );
+  return (
+    <Box>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session!.user!.image!}
+            fallback="?"
+            size="2"
+            radius="full"
+            className="cursor-pointer"
+            referrerPolicy="no-referrer"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2">{session!.user!.email}</Text>
+          </DropdownMenu.Label>
+          <DropdownMenuItem>
+            <Link href="/api/auth/signout">Logout</Link>
+          </DropdownMenuItem>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </Box>
   );
 };
 
