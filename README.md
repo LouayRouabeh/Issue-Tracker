@@ -1,4 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Issue Tracker
+
+Welcome to **Issue Tracker**, a web application designed to streamline the bug tracking and issue resolution process for development teams. By facilitating a more organized workflow, Issue Tracker aims to enhance productivity and collaboration among developers working on shared projects.
+
+## Project Description
+
+Issue Tracker is crafted to address the needs of development teams by providing a comprehensive platform for tracking, assigning, and managing bugs and tasks. Built with React, Next.js, and TypeScript, and styled with Tailwind CSS, this application not only performs efficiently but also offers a sleek, user-friendly interface. Incorporating Radix UI components for an enhanced UX, Prisma for seamless data management, and PostgreSQL for robust data storage, Issue Tracker is a full-featured solution equipped with modern technologies.
+
+## Features
+
+- **Google Authentication**: Secure login functionality using Google OAuth for easy access.
+- **Form Handling**: Efficiently manage submissions for reporting and updating issues.
+- **Sorting and Filtering**: Organize issues based on priority, status, or assigned personnel for better management.
+- **Data Fetching**: Real-time data retrieval to ensure the most current status of issues is displayed.
+- **Loading Skeletons**: Smooth placeholders during data load for an uninterrupted user experience.
+- **Dark Mode**: A toggleable dark theme to accommodate user preference and reduce eye strain.
+- **Navigation**: Intuitive navigation throughout the application for easy access to various sections.
+- **Pagination**: Efficiently manage and browse through large lists of issues without overwhelming the user.
+- **Dashboard with Graphs**: Visual representations of project metrics for a quick overview of issue status and team performance.
+
+## Technology Stack
+
+- **Frontend**: React, Next.js, TypeScript, Tailwind CSS
+- **Components**: Radix UI
+- **Backend/ORM**: Prisma
+- **Database**: PostgreSQL
+
 
 ## Getting Started
 
